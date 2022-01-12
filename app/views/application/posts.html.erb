@@ -1,0 +1,16 @@
+<br>
+<br>
+<br>
+
+
+<% posts.each do |post|%>
+id : <%= post["id"]%> <br>
+title: <%= post["title"]%><br>
+content: <%= post["body"]%><br>
+author: <%= post["author"]%><br>
+updated_at: <%= post["created_at"]%><br>
+<a href="/list_post/<%=post['id']%>/">read more</a><br>
+<hr/>
+<% end %>
+<a href="/new_post">New Post</a><br>
+<br>

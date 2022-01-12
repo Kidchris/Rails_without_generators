@@ -1,0 +1,55 @@
+<br>
+<br>
+<br>
+title: <%= post.title %><br>
+content: <%= post.body%><br>
+author: <%= post.author%><br>
+updated_at: <%= post.created_at%><br>
+<a href="/list_post"> Posts </a>
+<a href="/edit_post/<%= post.id%>"> Edit Post </a>
+<form method="post" action="/delete_post/<%= post.id%>" style="display:inline;">
+  <input type="submit" value="Delete">
+</form>
+<br />
+<br />
+<div class="comments">
+  <h3>Comments:</h3>
+  <hr />
+  <% comments.each_with_index do |comment, index| %>
+    <div class="comment">
+      <small class="comment_meta">
+        <span class="comment_author">#<%= index+1 %> by <%= comment.author %> -</span>
+        <em class="comment_created_at"><%= comment.created_at %></em>
+      </small>
+      <p class="comment_body"><%= comment.body %></p>
+    </div>
+    <form method="post" action="/list_post/<%= post.id %>/delete_comment/<%=
+          comment.id %>">
+      <input type="submit" value="Delete Comment" />
+    </form>
+    <hr />
+  <% end %>
+</div>
+<div class="errors">
+  <% comment.errors.each do |attribute, error| %>
+    <p class="error" style="color: orange">
+      <%= attribute %>: <%= error %>
+    </p>
+  <% end%>
+</div>
+</div>
+<form method="post" action="/create_comment_for_post/<%= post.id %>">
+  <label for="body">Comment</label>
+  <textarea id="body" name="body"><%= comment.body %></textarea>
+  <br />
+  <br />
+  <label for="author">Name</label>
+  <input id="author" name="author" type="text" value="<%= comment.author %>"/>
+  <br />
+  <br />
+  <input type="submit" value="Add Comment" />
+</form>
+<hr />
+<br>
+<br>
+<br>
